@@ -1,9 +1,9 @@
 ﻿using System.Collections.Generic;
 
-namespace grpcVelocity.Dependency.FeatureConfiguration
+namespace grpcVelocity.Dependency.FeatureSetup.FeatureConfiguration
 {
     public interface IFeatureConfiguration
     {
-        Dictionary<string, List<string>> GetConfiguration(string key);
+        List<string> GetConfiguration(string key);
     }
 }

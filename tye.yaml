@@ -9,6 +9,7 @@ extensions:
 - name: dapr
   # log-level configures the log level of the dapr sidecar
   log-level: debug
+  components-path: "./components/"
 services:
 - name: grpcvelocity
   project: grpcVelocity/grpcVelocity.csproj
@@ -20,3 +21,8 @@ services:
   replicas: 1
   bindings:
    - port: 1235
+# - name: redis
+#   image: redis
+#   bindings:
+#   - port: 6379
+#     connectionString: "${host}:${port}" 

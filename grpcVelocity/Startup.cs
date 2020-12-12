@@ -1,4 +1,5 @@
-﻿using Amazon.DynamoDBv2;
+﻿using System.Collections.Generic;
+using Amazon.DynamoDBv2;
 using grpcVelocity.Dependency.FeatureSetup;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;

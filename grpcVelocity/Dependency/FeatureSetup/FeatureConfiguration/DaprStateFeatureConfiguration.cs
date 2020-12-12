@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Text.Json;
 using Dapr.Client;
-using grpcVelocity.Dependency.FeatureConfiguration;
 using Microsoft.Extensions.Configuration;
 
 namespace grpcVelocity.Dependency.FeatureSetup.FeatureConfiguration
@@ -23,11 +22,42 @@ namespace grpcVelocity.Dependency.FeatureSetup.FeatureConfiguration
             _daprClient = new DaprClientBuilder()
                 .UseJsonSerializationOptions(jsonSerializerOptions)
                 .Build();
+
+            AddDemoConfigSetup(_daprClient);
         }
 
-        public Dictionary<string, List<string>> GetConfiguration(string key)
+        public List<string> GetConfiguration(string key)
         {
-            return _daprClient.GetStateAsync<Dictionary<string, List<string>>>("statestore", "velocityList").Result;
+            return _daprClient.GetStateAsync<List<string>>("statestore", "velocityList").Result;
+        }
+
+        private static void AddDemoConfigSetup(DaprClient daprClient)
+        {
+            var redisSetup = new List<string>
+            {
+                "velocity_1min",
+                "velocity_2min",
+                "velocity_3min",
+                "velocity_4min",
+                "velocity_5min",
+                "velocity_6min",
+                "velocity_7min",
+                "velocity_8min",
+                "velocity_9min",
+                "velocity_10min",
+                "velocity_11min",
+                "velocity_12min",
+                "velocity_13min",
+                "velocity_14min",
+                "velocity_15min",
+                "velocity_16min",
+                "velocity_17min",
+                "velocity_18min",
+                "velocity_19min",
+                "velocity_20min"
+            };
+
+            daprClient.SaveStateAsync("statestore", "velocityList", redisSetup);
         }
     }
 }
