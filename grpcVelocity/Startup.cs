@@ -14,6 +14,7 @@ namespace grpcVelocity
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddGrpc();
+            services.AddGrpcReflection();
             services.AddTransient<IFeatureSetup, DefaultFeatureSetup>();
         }
 
@@ -31,6 +32,11 @@ namespace grpcVelocity
             {
                 endpoints.MapGrpcService<VelocityService>();
                 endpoints.MapGrpcService<DaprService>();
+
+                if (env.IsDevelopment())
+                {
+                    endpoints.MapGrpcReflectionService();
+                }
 
                 endpoints.MapGet("/", async context =>
                 {
