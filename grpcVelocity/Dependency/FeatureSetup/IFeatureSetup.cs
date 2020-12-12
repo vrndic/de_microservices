@@ -6,6 +6,6 @@ namespace grpcVelocity.Dependency.FeatureSetup
     public interface IFeatureSetup
     {
         IFeatureConfiguration GetConfiguration();
-        IFeatureSourceData GetData();
+        IFeatureSourceData GetSourceData();
     }
 }

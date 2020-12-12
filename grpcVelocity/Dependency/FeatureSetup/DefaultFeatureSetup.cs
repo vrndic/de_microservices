@@ -12,7 +12,7 @@ namespace grpcVelocity.Dependency.FeatureSetup
             return new DaprStateFeatureConfiguration();
         }
 
-        public IFeatureSourceData GetData()
+        public IFeatureSourceData GetSourceData()
         {
             return new DynamoDbFeatureSourceData();
         }

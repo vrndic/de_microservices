@@ -18,6 +18,7 @@ namespace grpcVelocity
 
         public override Task<VelocityResponse> GetVelocity(VelocityRequest request, ServerCallContext context)
         {
+            var phoneRecord = _featureSetup.GetSourceData().GetData(request.PhoneNumber);
             return Task.FromResult(new VelocityResponse
             {
                 Message = "Hello " + request.PhoneNumber
