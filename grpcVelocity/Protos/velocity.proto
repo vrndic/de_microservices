@@ -1,0 +1,22 @@
+syntax = "proto3";
+
+option csharp_namespace = "DataEngineering.Microservices.Features";
+
+package Features;
+
+// The greeting service definition.
+service Velocity {
+  // Sends a greeting
+  rpc GetVelocity (VelocityRequest) returns (VelocityResponse);
+}
+
+// The request message containing the user's name.
+message VelocityRequest {
+  string phoneNumber = 1;
+}
+
+// The response message containing the greetings.
+message VelocityResponse {
+  string message = 1;
+  map<string, string> response = 2;
+}

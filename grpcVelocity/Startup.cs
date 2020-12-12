@@ -31,7 +31,7 @@ namespace grpcVelocity
 
             app.UseEndpoints(endpoints =>
             {
-                endpoints.MapGrpcService<GreeterService>();
+                endpoints.MapGrpcService<VelocityService>();
 
                 endpoints.MapGet("/", async context =>
                 {
