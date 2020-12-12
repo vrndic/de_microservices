@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using grpcVelocity.Dependency.FeatureSetup;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -17,6 +14,7 @@ namespace grpcVelocity
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddGrpc();
+            services.AddTransient<IFeatureSetup, DefaultFeatureSetup>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -32,6 +30,7 @@ namespace grpcVelocity
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapGrpcService<VelocityService>();
+                endpoints.MapGrpcService<DaprService>();
 
                 endpoints.MapGet("/", async context =>
                 {

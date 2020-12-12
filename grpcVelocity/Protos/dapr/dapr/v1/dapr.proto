@@ -7,10 +7,10 @@ syntax = "proto3";
 
 package dapr.proto.runtime.v1;
 
-import "common/any.proto";
-import "common/empty.proto";
+import "google/protobuf/any.proto";
+import "google/protobuf/empty.proto";
 
-option csharp_namespace = "Dapr.Client.Autogen.Grpc.v1";
+option csharp_namespace = "DataEngineering.Microservices";
 
 // Dapr service provides APIs to user application to access Dapr building blocks.
 service Dapr {

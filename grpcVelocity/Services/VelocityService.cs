@@ -1,9 +1,7 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 using DataEngineering.Microservices.Features;
 using Grpc.Core;
+using grpcVelocity.Dependency.FeatureSetup;
 using Microsoft.Extensions.Logging;
 
 namespace grpcVelocity
@@ -11,9 +9,11 @@ namespace grpcVelocity
     public class VelocityService : Velocity.VelocityBase
     {
         private readonly ILogger<VelocityService> _logger;
-        public VelocityService(ILogger<VelocityService> logger)
+        private readonly IFeatureSetup _featureSetup;
+        public VelocityService(ILogger<VelocityService> logger, IFeatureSetup featureSetup)
         {
             _logger = logger;
+            _featureSetup = featureSetup;
         }
 
         public override Task<VelocityResponse> GetVelocity(VelocityRequest request, ServerCallContext context)

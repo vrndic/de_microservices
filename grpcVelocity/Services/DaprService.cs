@@ -1,26 +1,41 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
+using DataEngineering.Microservices;
 using DataEngineering.Microservices.Features;
+using Google.Protobuf.WellKnownTypes;
 using Grpc.Core;
 using Microsoft.Extensions.Logging;
+using static DataEngineering.Microservices.InvokeResponse;
 
 namespace grpcVelocity
 {
-    public class VelocityService : Velocity.VelocityBase
+    public class DaprService : DataEngineering.Microservices.Dapr.DaprBase
     {
         private readonly ILogger<VelocityService> _logger;
-        public VelocityService(ILogger<VelocityService> logger)
+        private readonly VelocityService _velocityService;
+        public DaprService(ILogger<VelocityService> logger, VelocityService velocityService)
         {
             _logger = logger;
+            _velocityService = velocityService;
         }
 
-        public override Task<VelocityResponse> GetVelocity(VelocityRequest request, ServerCallContext context)
+        public override Task<InvokeResponse> InvokeService(InvokeServiceRequest request, ServerCallContext context)
         {
-            return Task.FromResult(new VelocityResponse
+            var response = new Any();
+            switch (request.Message.Method)
             {
-                Message = "Hello " + request.PhoneNumber
+                case "GetVelocity":
+                    var inputString = request.Message.Data.Value.ToStringUtf8();
+                    var velocityRequest = new VelocityRequest { PhoneNumber = inputString };
+                    var velocityResponse = _velocityService.GetVelocity(velocityRequest, context).Result;
+
+                    var msg = new VelocityResponse { Message = velocityResponse.Message, Response = { velocityResponse.Response } };
+                    response = Any.Pack(msg);
+                    break;
+            }
+
+            return Task.FromResult(new InvokeResponse
+            {
+                Data = response
             });
         }
     }
