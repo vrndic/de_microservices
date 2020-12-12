@@ -1,18 +1,18 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
-using Amazon;
 using Amazon.DynamoDBv2;
 using Amazon.DynamoDBv2.Model;
-using grpcVelocity.Dependency.FeatureSourceData;
+using Microsoft.Extensions.Configuration;
 
 namespace grpcVelocity.Dependency.FeatureSetup.FeatureSourceData
 {
     public class DynamoDbFeatureSourceData : IFeatureSourceData
     {
         private readonly IAmazonDynamoDB _dynamoDbConnection;
-        public DynamoDbFeatureSourceData()
+        public DynamoDbFeatureSourceData(IConfiguration configuration)
         {
-            _dynamoDbConnection = new AmazonDynamoDBClient(RegionEndpoint.EUWest1);
+            var options = configuration.GetAWSOptions();
+            _dynamoDbConnection = options.CreateServiceClient<IAmazonDynamoDB>();
         }
         public async Task<QueryResponse> GetData(string key)
         {

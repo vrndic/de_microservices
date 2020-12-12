@@ -1,5 +1,5 @@
-﻿using grpcVelocity.Dependency.FeatureSetup;
-using Microsoft.AspNetCore.Authentication;
+﻿using Amazon.DynamoDBv2;
+using grpcVelocity.Dependency.FeatureSetup;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -22,6 +22,7 @@ namespace grpcVelocity
         {
             services.AddGrpc();
             services.AddGrpcReflection();
+            services.AddAWSService<IAmazonDynamoDB>();
             services.AddTransient<IFeatureSetup, DefaultFeatureSetup>();
         }
 
