@@ -1,0 +1,22 @@
+# tye application configuration file
+# read all about it at https://github.com/dotnet/tye
+#
+# when you've given us a try, we'd love to know what you think:
+#    https://aka.ms/AA7q20u
+#
+name: de_microservices
+extensions:
+- name: dapr
+  # log-level configures the log level of the dapr sidecar
+  log-level: debug
+services:
+- name: grpcvelocity
+  project: grpcVelocity/grpcVelocity.csproj
+  replicas: 1
+  bindings:
+   - port: 1234
+- name: grpcfeaturecollector
+  project: grpcFeatureCollector/grpcFeatureCollector.csproj
+  replicas: 1
+  bindings:
+   - port: 1235
