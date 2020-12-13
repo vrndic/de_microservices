@@ -1,8 +1,5 @@
-using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using Amazon.DynamoDBv2;
-using Amazon.DynamoDBv2.Model;
 using DataEngineering.Microservices.Features;
 using Grpc.Core;
 using grpcVelocity.Dependency.FeatureSetup;
@@ -26,7 +23,7 @@ namespace grpcVelocity
 
         public override Task<VelocityResponse> GetVelocity(VelocityRequest request, ServerCallContext context)
         {
-            var variableTransactions = _featureSetup.GetSourceData().GetData(request.PhoneNumber).Result;
+            var variableTransactions = _featureSetup.GetSourceData().GetData(request.PhoneNumber);
 
             return Task.FromResult(new VelocityResponse
             {
