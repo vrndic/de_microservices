@@ -9,10 +9,9 @@ namespace grpcVelocity.Dependency.FeatureSetup.FeatureSourceData
     public class DynamoDbFeatureSourceData : IFeatureSourceData
     {
         private readonly IAmazonDynamoDB _dynamoDbConnection;
-        public DynamoDbFeatureSourceData(IConfiguration configuration)
+        public DynamoDbFeatureSourceData(IConfiguration configuration, IAmazonDynamoDB dynamoDbConnection)
         {
-            var options = configuration.GetAWSOptions();
-            _dynamoDbConnection = options.CreateServiceClient<IAmazonDynamoDB>();
+            _dynamoDbConnection = dynamoDbConnection;
         }
         public async Task<QueryResponse> GetData(string key)
         {

@@ -10,6 +10,8 @@ extensions:
   # log-level configures the log level of the dapr sidecar
   log-level: debug
   components-path: "./components/"
+- name: zipkin
+  logPath: ./.logs/
 services:
 - name: grpcvelocity
   project: grpcVelocity/grpcVelocity.csproj

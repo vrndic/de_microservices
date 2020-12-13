@@ -23,7 +23,10 @@ namespace grpcVelocity
         {
             services.AddGrpc();
             services.AddGrpcReflection();
-            services.AddAWSService<IAmazonDynamoDB>();
+            services.AddDaprClient();
+            //services.AddAWSService<IAmazonDynamoDB>();
+            //services.AddTransient<IFeatureSetup, DefaultFeatureSetup>();
+            //var setUp = new DefaultFeatureSetup(Configuration);
             services.AddTransient<IFeatureSetup, DefaultFeatureSetup>();
         }
 

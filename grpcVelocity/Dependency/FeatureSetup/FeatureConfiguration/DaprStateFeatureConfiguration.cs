@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.Text.Json;
 using Dapr.Client;
 using Microsoft.Extensions.Configuration;
 
@@ -10,20 +9,13 @@ namespace grpcVelocity.Dependency.FeatureSetup.FeatureConfiguration
         public IConfiguration Configuration { get; set; }
         private readonly DaprClient _daprClient;
 
-        public DaprStateFeatureConfiguration(IConfiguration configuration)
+        public DaprStateFeatureConfiguration(IConfiguration configuration, DaprClient daprClient)
         {
             Configuration = configuration;
-            var jsonSerializerOptions = new JsonSerializerOptions
-            {
-                PropertyNameCaseInsensitive = true,
-                PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
-            };
+            _daprClient = daprClient;
 
-            _daprClient = new DaprClientBuilder()
-                .UseJsonSerializationOptions(jsonSerializerOptions)
-                .Build();
-
-            AddDemoConfigSetup(_daprClient);
+            //TODO Just for demo
+            //AddDemoConfigSetup(_daprClient);
         }
 
         public List<string> GetConfiguration(string key)
