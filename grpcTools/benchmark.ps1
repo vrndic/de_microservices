@@ -2,9 +2,18 @@ ghz  --insecure `
 --proto ./Protos/velocity.proto `
 --call Features.Velocity.GetVelocity `
 -d  '{\"phoneNumber\": \"+8yDS3o9cSZEIZ7sPLOWHhZclQCBarXFKDomOfLJoHxl671+sVwQhkM/9KE/kcBJbupFczN3YMbU0Wrq6ru+MQ==3375653\"}' `
--n 300 `
--c 30 `
---connections=30 `
+-n 1000 `
+-c 40 `
+--connections=40 `
+127.0.0.1:1234
+
+ghz  --insecure `
+--proto ./Protos/velocity.proto `
+--call Features.Velocity.GetVelocity `
+-d  '{\"phoneNumber\": \"+8yDS3o9cSZEIZ7sPLOWHhZclQCBarXFKDomOfLJoHxl671+sVwQhkM/9KE/kcBJbupFczN3YMbU0Wrq6ru+MQ==3375653\"}' `
+-n 50 `
+-c 5 `
+--connections=5 `
 127.0.0.1:1234
 
 
